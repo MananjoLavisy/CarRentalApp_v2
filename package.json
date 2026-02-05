@@ -31,6 +31,7 @@
     "react-native-svg": "15.8.0",
     "react-native-vector-icons": "^10.0.0",
     "react-native-web": "~0.19.13",
+    "sql.js": "^1.13.0",
     "yup": "^1.4.0"
   },
   "devDependencies": {
