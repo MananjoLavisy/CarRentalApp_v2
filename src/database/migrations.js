@@ -18,7 +18,7 @@ export const createTables = async () => {
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       );
     `);
-    
+
     // Table Voitures
     await db.execAsync(`
       CREATE TABLE IF NOT EXISTS voitures (

@@ -24,7 +24,7 @@ export const seedDatabase = async () => {
         prix_par_jour: 150000,
         immatriculation: '1234 TAB',
         description: 'Voiture économique et fiable, parfaite pour les trajets urbains',
-        photos: JSON.stringify(['https://via.placeholder.com/400x300/ffffff/000000?text=Toyota+Corolla'])
+        photos: JSON.stringify(['local:car-placeholder'])
       },
       {
         marque: 'Hyundai',
@@ -37,7 +37,7 @@ export const seedDatabase = async () => {
         prix_par_jour: 250000,
         immatriculation: '5678 TAB',
         description: 'SUV spacieux et confortable pour toute la famille',
-        photos: JSON.stringify(['https://via.placeholder.com/400x300/000000/ffffff?text=Hyundai+Tucson'])
+        photos: JSON.stringify(['local:car-placeholder'])
       },
       {
         marque: 'Renault',
@@ -50,7 +50,7 @@ export const seedDatabase = async () => {
         prix_par_jour: 120000,
         immatriculation: '9012 TAB',
         description: 'Petite voiture agile, idéale pour la ville',
-        photos: JSON.stringify(['https://via.placeholder.com/400x300/ff0000/ffffff?text=Renault+Clio'])
+        photos: JSON.stringify(['local:car-placeholder'])
       },
       {
         marque: 'Peugeot',
@@ -63,7 +63,7 @@ export const seedDatabase = async () => {
         prix_par_jour: 200000,
         immatriculation: '3456 TAB',
         description: 'SUV élégant avec technologies embarquées',
-        photos: JSON.stringify(['https://via.placeholder.com/400x300/808080/ffffff?text=Peugeot+3008'])
+        photos: JSON.stringify(['local:car-placeholder'])
       },
       {
         marque: 'Mercedes',
@@ -76,7 +76,7 @@ export const seedDatabase = async () => {
         prix_par_jour: 350000,
         immatriculation: '7890 TAB',
         description: 'Berline de luxe pour une expérience premium',
-        photos: JSON.stringify(['https://via.placeholder.com/400x300/000000/ffffff?text=Mercedes+C'])
+        photos: JSON.stringify(['local:car-placeholder'])
       },
       {
         marque: 'Ford',
@@ -89,7 +89,7 @@ export const seedDatabase = async () => {
         prix_par_jour: 280000,
         immatriculation: '2468 TAB',
         description: 'Pick-up robuste pour tous terrains',
-        photos: JSON.stringify(['https://via.placeholder.com/400x300/0000ff/ffffff?text=Ford+Ranger'])
+        photos: JSON.stringify(['local:car-placeholder'])
       }
     ];
     

@@ -14,6 +14,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { fetchCarDetails } from '../../services/carService';
 import { checkIsFavorite, toggleCarFavorite } from '../../services/FavoriteService';
 import { formatPriceSimple } from '../../utils/priceCalculator';
+import { getCarImageSource } from '../../utils/imageHelpers';
 
 const CarDetailsScreen = ({ route, navigation }) => {
   const { carId } = route.params;
@@ -91,7 +92,7 @@ const CarDetailsScreen = ({ route, navigation }) => {
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.imageContainer}>
-          <Image source={{ uri: car.photos[0] }} style={styles.image} />
+          <Image source={getCarImageSource(car.photos[0])} style={styles.image} />
           <TouchableOpacity
             style={styles.backButton}
             onPress={() => navigation.goBack()}
@@ -345,10 +346,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#3498db',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
+    boxShadow: '0px 4px 8px rgba(52, 152, 219, 0.3)',
     elevation: 4,
   },
   rentIcon: {

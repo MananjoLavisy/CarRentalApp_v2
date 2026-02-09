@@ -2,6 +2,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { formatDate } from '../utils/dateHelpers';
 import { formatPriceSimple } from '../utils/priceCalculator';
+import { getCarImageSource } from '../utils/imageHelpers';
 
 const BookingCard = ({ reservation, onPress }) => {
   const getStatusColor = (status) => {
@@ -27,7 +28,7 @@ const BookingCard = ({ reservation, onPress }) => {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.7}>
       <Image 
-        source={{ uri: reservation.photos[0] }} 
+        source={getCarImageSource(reservation.photos[0])} 
         style={styles.image}
         resizeMode="cover"
       />
@@ -76,10 +77,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginHorizontal: 16,
     marginVertical: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
+    boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
     elevation: 3,
     overflow: 'hidden',
   },

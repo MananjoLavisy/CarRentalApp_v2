@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useAuth } from '../contexts/AuthContext';
 import { checkIsFavorite, toggleCarFavorite } from '../services/FavoriteService';
 import { formatPriceSimple } from '../utils/priceCalculator';
+import { getCarImageSource } from '../utils/imageHelpers';
 
 const CarCard = ({ car, onPress, showFavorite = true }) => {
   const { user } = useAuth();
@@ -32,7 +33,7 @@ const CarCard = ({ car, onPress, showFavorite = true }) => {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.7}>
       <Image 
-        source={{ uri: car.photos[0] }} 
+        source={getCarImageSource(car.photos[0])} 
         style={styles.image}
         resizeMode="cover"
       />
@@ -86,10 +87,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginHorizontal: 16,
     marginVertical: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
+    boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
     elevation: 3,
     overflow: 'hidden',
   },
@@ -156,4 +154,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default carCard;
+export default CarCard;

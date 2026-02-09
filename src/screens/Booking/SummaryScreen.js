@@ -11,6 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { formatDate } from '../../utils/dateHelpers';
 import { formatPriceSimple } from '../../utils/priceCalculator';
+import { getCarImageSource } from '../../utils/imageHelpers';
 import { useAuth } from '../../contexts/AuthContext';
 
 const SummaryScreen = ({ route, navigation }) => {
@@ -45,7 +46,7 @@ const SummaryScreen = ({ route, navigation }) => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Voiture sélectionnée</Text>
           <View style={styles.carCard}>
-            <Image source={{ uri: car.photos[0] }} style={styles.carImage} />
+            <Image source={getCarImageSource(car.photos[0])} style={styles.carImage} />
             <View style={styles.carInfo}>
               <Text style={styles.carTitle}>
                 {car.marque} {car.modele}
@@ -386,10 +387,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#27ae60',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
+    boxShadow: '0px 4px 8px rgba(39, 174, 96, 0.3)',
     elevation: 4,
   },
   paymentButtonText: {

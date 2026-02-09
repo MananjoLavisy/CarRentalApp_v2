@@ -23,6 +23,7 @@ import SummaryScreen from '../screens/Booking/SummaryScreen';
 import ReservationDetailsScreen from '../screens/Reservations/ReservationDetailsScreen';
 import ReservationsScreen from '../screens/Reservations/ReservationsScreen';
 
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 

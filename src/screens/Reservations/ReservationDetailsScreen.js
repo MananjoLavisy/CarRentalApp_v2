@@ -16,6 +16,7 @@ import { getPaymentByReservation } from '../../services/PaymentService';
 import { getExtensionHistory } from '../../services/ExtensionService';
 import { formatDate, formatDateTime, getDaysUntil } from '../../utils/dateHelpers';
 import { formatPriceSimple } from '../../utils/priceCalculator';
+import { getCarImageSource } from '../../utils/imageHelpers';
 
 const ReservationDetailsScreen = ({ route, navigation }) => {
   const { reservationId } = route.params;
@@ -172,7 +173,7 @@ const ReservationDetailsScreen = ({ route, navigation }) => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Véhicule</Text>
           <View style={styles.carCard}>
-            <Image source={{ uri: reservation.photos[0] }} style={styles.carImage} />
+            <Image source={getCarImageSource(reservation.photos[0])} style={styles.carImage} />
             <View style={styles.carInfo}>
               <Text style={styles.carTitle}>
                 {reservation.marque} {reservation.modele}
@@ -396,10 +397,7 @@ const styles = StyleSheet.create({
     margin: 20,
     borderRadius: 16,
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
+    boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
     elevation: 3,
   },
   qrTitle: {
@@ -428,10 +426,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginBottom: 12,
     borderRadius: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
+    boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
     elevation: 3,
   },
   sectionTitle: {

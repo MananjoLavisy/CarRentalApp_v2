@@ -32,15 +32,15 @@ export const register = async (userData) => {
 export const login = async (email, password) => {
   try {
     const user = await getUserByEmail(email);
-    
+
     if (!user) {
       throw new Error('Email ou mot de passe incorrect');
     }
-    
+
     if (user.mot_de_passe !== password) {
       throw new Error('Email ou mot de passe incorrect');
     }
-    
+
     return {
       success: true,
       user: {
