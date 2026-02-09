@@ -189,6 +189,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f8f9fa',
+    overflow: 'hidden',
   },
   loadingContainer: {
     flex: 1,

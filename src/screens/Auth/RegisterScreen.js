@@ -69,12 +69,19 @@ const RegisterScreen = ({ navigation }) => {
     }
   };
 
+  const Wrapper = Platform.OS === 'web' ? View : KeyboardAvoidingView;
+  const wrapperProps = Platform.OS === 'web'
+    ? { style: styles.container }
+    : { style: styles.container, behavior: Platform.OS === 'ios' ? 'padding' : undefined };
+
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-    >
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+    <Wrapper {...wrapperProps}>
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+        style={styles.scrollView}
+      >
         <View style={styles.header}>
           <TouchableOpacity
             style={styles.backButton}
@@ -197,7 +204,7 @@ const RegisterScreen = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-    </KeyboardAvoidingView>
+    </Wrapper>
   );
 };
 
@@ -206,8 +213,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  scrollView: {
+    flex: 1,
+  },
   scrollContent: {
-    flexGrow: 1,
     padding: 20,
     paddingBottom: 40,
   },
