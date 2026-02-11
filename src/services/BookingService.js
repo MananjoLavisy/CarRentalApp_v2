@@ -25,7 +25,7 @@ export const createBooking = async (userId, carId, startDate, endDate, pricePerD
     // Générer ticket ID
     const ticketId = generateTicketId(Date.now());
     
-    // Créer la réservation
+    // Créer la réservation (en attente d'approbation admin)
     const reservation = await createReservation({
       user_id: userId,
       voiture_id: carId,
@@ -35,9 +35,6 @@ export const createBooking = async (userId, carId, startDate, endDate, pricePerD
       prix_total: totalPrice,
       ticket_id: ticketId
     });
-    
-    // Mettre à jour le statut de la voiture
-    await updateCarStatus(carId, 'louée');
     
     return {
       success: true,

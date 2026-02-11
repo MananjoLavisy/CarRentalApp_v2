@@ -14,12 +14,15 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { fetchReservationDetails, cancelReservation } from '../../services/BookingService';
 import { getPaymentByReservation } from '../../services/PaymentService';
 import { getExtensionHistory } from '../../services/ExtensionService';
+import { exportTicketPDF, exportReceiptPDF } from '../../services/PdfService';
+import { useAuth } from '../../contexts/AuthContext';
 import { formatDate, formatDateTime, getDaysUntil } from '../../utils/dateHelpers';
 import { formatPriceSimple } from '../../utils/priceCalculator';
 import { getCarImageSource } from '../../utils/imageHelpers';
 
 const ReservationDetailsScreen = ({ route, navigation }) => {
   const { reservationId } = route.params;
+  const { user } = useAuth();
   const [reservation, setReservation] = useState(null);
   const [payment, setPayment] = useState(null);
   const [extensions, setExtensions] = useState([]);
@@ -45,6 +48,37 @@ const ReservationDetailsScreen = ({ route, navigation }) => {
       Alert.alert('Erreur', 'Impossible de charger les détails');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDownloadTicket = async () => {
+    const result = await exportTicketPDF({
+      ticketId: reservation.ticket_id,
+      car: {
+        marque: reservation.marque,
+        modele: reservation.modele,
+        annee: reservation.annee,
+        type: reservation.type,
+        immatriculation: reservation.immatriculation,
+        prix_par_jour: reservation.prix_total / reservation.nombre_jours,
+      },
+      startDate: reservation.date_debut,
+      endDate: reservation.date_fin,
+      numberOfDays: reservation.nombre_jours,
+      totalPrice: reservation.prix_total,
+      paymentMethod: payment?.methode_paiement || '-',
+      user,
+    });
+    if (!result.success) {
+      Alert.alert('Erreur', 'Impossible de générer le PDF');
+    }
+  };
+
+  const handleDownloadReceipt = async () => {
+    if (!payment) return;
+    const result = await exportReceiptPDF({ reservation, payment, user });
+    if (!result.success) {
+      Alert.alert('Erreur', 'Impossible de générer le reçu PDF');
     }
   };
 
@@ -167,6 +201,10 @@ const ReservationDetailsScreen = ({ route, navigation }) => {
             <QRCode value={reservation.ticket_id} size={180} />
           </View>
           <Text style={styles.ticketId}>{reservation.ticket_id}</Text>
+          <TouchableOpacity style={styles.downloadButton} onPress={handleDownloadTicket}>
+            <Icon name="download" size={16} color="#fff" />
+            <Text style={styles.downloadButtonText}>Télécharger ticket PDF</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Informations voiture */}
@@ -251,6 +289,10 @@ const ReservationDetailsScreen = ({ route, navigation }) => {
                 <Text style={styles.paidText}>Payé</Text>
               </View>
             </View>
+            <TouchableOpacity style={styles.receiptButton} onPress={handleDownloadReceipt}>
+              <Icon name="receipt" size={16} color="#3498db" />
+              <Text style={styles.receiptButtonText}>Télécharger le reçu PDF</Text>
+            </TouchableOpacity>
           </View>
         )}
 
@@ -421,6 +463,22 @@ const styles = StyleSheet.create({
     marginTop: 12,
     letterSpacing: 1,
   },
+  downloadButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#27ae60',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    marginTop: 14,
+  },
+  downloadButtonText: {
+    color: '#fff',
+    fontSize: 13,
+    fontWeight: '600',
+    marginLeft: 6,
+  },
   section: {
     backgroundColor: '#fff',
     padding: 20,
@@ -544,6 +602,22 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#27ae60',
     marginLeft: 4,
+  },
+  receiptButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#e3f2fd',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    marginTop: 14,
+  },
+  receiptButtonText: {
+    color: '#3498db',
+    fontSize: 13,
+    fontWeight: '600',
+    marginLeft: 6,
   },
   extensionCard: {
     backgroundColor: '#fff3e0',

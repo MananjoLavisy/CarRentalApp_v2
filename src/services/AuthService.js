@@ -18,7 +18,8 @@ export const register = async (userData) => {
         prenom: user.prenom,
         email: user.email,
         telephone: user.telephone,
-        cin: user.cin
+        cin: user.cin,
+        role: 'user'
       }
     };
   } catch (error) {
@@ -49,7 +50,8 @@ export const login = async (email, password) => {
         prenom: user.prenom,
         email: user.email,
         telephone: user.telephone,
-        cin: user.cin
+        cin: user.cin,
+        role: user.role || 'user'
       }
     };
   } catch (error) {

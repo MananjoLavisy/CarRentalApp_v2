@@ -15,6 +15,7 @@ export const createTables = async () => {
         cin TEXT,
         mot_de_passe TEXT NOT NULL,
         photo_profil TEXT,
+        role TEXT DEFAULT 'user',
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       );
     `);
@@ -49,7 +50,7 @@ export const createTables = async () => {
         date_fin DATE NOT NULL,
         nombre_jours INTEGER NOT NULL,
         prix_total REAL NOT NULL,
-        statut TEXT DEFAULT 'confirmée',
+        statut TEXT DEFAULT 'en_attente',
         ticket_id TEXT UNIQUE,
         date_reservation DATETIME DEFAULT CURRENT_TIMESTAMP,
         extended BOOLEAN DEFAULT 0,

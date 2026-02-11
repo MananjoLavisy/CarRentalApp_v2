@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
     color: '#1976d2',
     marginLeft: 8,
     fontWeight: '600',
-  },  
+  },
   priceRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
   },
   priceLabel: {
     fontSize: 16,
-    color: '#7f8c8d', 
+    color: '#7f8c8d',
   },
   priceValue: {
     fontSize: 16,
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
     marginVertical: 12,
   },
   totalRow: {
-    flexDirection: 'row', 
+    flexDirection: 'row',
     justifyContent: 'space-between',
   },
   totalLabel: {
@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 8,
     marginTop: 16,
-  },  
+  },
   infoText: {
     fontSize: 14,
     color: '#1976d2',
@@ -336,19 +336,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginLeft: 8,
   },
-  infoBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#e3f2fd',
-    padding: 12,
-    borderRadius: 8,
-    marginTop: 16,
-  },
-  infoText: {
-    fontSize: 14,
-    color: '#1976d2',
-    marginLeft: 8,
-  },
-  });
+});
 
 export default BookingFormScreen;

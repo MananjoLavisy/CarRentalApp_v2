@@ -50,6 +50,19 @@ export const getUserById = async (id) => {
   }
 };
 
+export const getAllUsers = async () => {
+  const db = await getDBConnection();
+
+  try {
+    return await db.getAllAsync(
+      "SELECT id, nom, prenom, email, telephone, cin, role, created_at FROM users WHERE role = 'user' ORDER BY created_at DESC"
+    );
+  } catch (error) {
+    console.error('Error getting all users:', error);
+    throw error;
+  }
+};
+
 export const updateUser = async (id, updates) => {
   const db = await getDBConnection();
   const fields = Object.keys(updates);

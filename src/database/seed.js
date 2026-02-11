@@ -11,6 +11,13 @@ export const seedDatabase = async () => {
       return;
     }
     
+    // Seed Admin
+    await db.runAsync(
+      `INSERT INTO users (nom, prenom, email, telephone, cin, mot_de_passe, role)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      ['Admin', 'Super', 'admin@carrental.mg', '034 00 000 00', '000000000', 'admin123', 'admin']
+    );
+
     // Seed Voitures
     const voitures = [
       {

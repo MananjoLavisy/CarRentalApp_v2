@@ -5,11 +5,14 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { formatDate } from '../../utils/dateHelpers';
+import { formatDate, getDaysDifference } from '../../utils/dateHelpers';
 import { formatPriceSimple } from '../../utils/priceCalculator';
+import { useAuth } from '../../contexts/AuthContext';
+import { exportTicketPDF } from '../../services/PdfService';
 
 const ConfirmationScreen = ({ route, navigation }) => {
   const {
@@ -21,6 +24,25 @@ const ConfirmationScreen = ({ route, navigation }) => {
     totalPrice,
     paymentMethod,
   } = route.params;
+  const { user } = useAuth();
+
+  const numberOfDays = getDaysDifference(startDate, endDate);
+
+  const handleDownloadTicket = async () => {
+    const result = await exportTicketPDF({
+      ticketId,
+      car,
+      startDate,
+      endDate,
+      numberOfDays,
+      totalPrice,
+      paymentMethod,
+      user,
+    });
+    if (!result.success) {
+      Alert.alert('Erreur', 'Impossible de générer le PDF');
+    }
+  };
 
   const handleGoToReservations = () => {
     navigation.reset({
@@ -57,6 +79,10 @@ const ConfirmationScreen = ({ route, navigation }) => {
           <Text style={styles.qrNote}>
             Présentez ce QR code lors du retrait du véhicule
           </Text>
+          <TouchableOpacity style={styles.downloadButton} onPress={handleDownloadTicket}>
+            <Icon name="download" size={18} color="#fff" />
+            <Text style={styles.downloadButtonText}>Télécharger le ticket PDF</Text>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.detailsCard}>
@@ -212,6 +238,22 @@ const styles = StyleSheet.create({
     color: '#7f8c8d',
     textAlign: 'center',
     marginTop: 8,
+  },
+  downloadButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#27ae60',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginTop: 16,
+  },
+  downloadButtonText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: '600',
+    marginLeft: 8,
   },
 
   detailsCard: {

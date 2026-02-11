@@ -125,7 +125,7 @@ const SummaryScreen = ({ route, navigation }) => {
         {/* Détail des prix */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Détail des prix</Text>
-          
+
           <View style={styles.priceRow}>
             <Text style={styles.priceLabel}>Prix par jour</Text>
             <Text style={styles.priceValue}>{formatPriceSimple(car.prix_par_jour)}</Text>
